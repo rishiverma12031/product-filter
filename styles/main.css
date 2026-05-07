@@ -1,0 +1,12 @@
+@import url(base/reset.css);
+@import url(base/variables.css);
+@import url(components/header.css);
+@import url(components/footer.css);
+@import url(components/filters.css);
+@import url(components/products.css);
+
+.main {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 1rem;
+}

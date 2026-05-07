@@ -1,0 +1,12 @@
+.filters {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 1rem;
+}
+
+.filters__heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+

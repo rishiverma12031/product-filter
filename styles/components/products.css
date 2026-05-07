@@ -1,0 +1,32 @@
+.products {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    gap: 1rem;
+}
+
+.products__heading {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.products__search {
+    display: flex;
+    padding: 0 2rem;
+    gap: 0.5rem;
+}
+
+.products__searchbar {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--primary);
+    flex-grow: 1;
+}
+
+.products__button {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--primary);
+    color: var(--background);
+}

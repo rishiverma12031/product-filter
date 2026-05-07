@@ -3,10 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/main.css">
     <title>Product Filter</title>
 </head>
 <body>
-    Product Filter
-    
+    <header class="header">
+        <p class="header__title">
+            Product Filter
+        </p>
+    </header>
+    <main class="main">
+        <aside class="filters">
+            <p class="filters__heading">Filters</p>
+            
+        </aside>
+        <section class="products">
+            <h1 class="products__heading">Products</h1>
+            <div class="products__search">
+                <input class="products__searchbar" type="text" name="searchbar" id="searchbar" placeholder="Type here to search...">
+                <button class="products__button">Search</button>
+            </div>
+            <div class="products__container"></div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>
+            Made with ❤️ by 
+            <a class="footer__link" href="https://rishiverma.netlify.app/">
+                Rishi Verma
+            </a>
+        </p>
+    </footer>
 </body>
 </html>
