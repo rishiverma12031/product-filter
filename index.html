@@ -15,7 +15,114 @@
     <main class="main">
         <aside class="filters">
             <p class="filters__heading">Filters</p>
-            
+            <fieldset>
+                <legend class="filters__subheading">Category</legend>
+                <div>
+                    <input type="checkbox" name="category" id="category1" value="Electronics">
+                    <label for="category1">Electronics</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" id="category2" value="Sports">
+                    <label for="category2">Sports</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" id="category3" value="Travel">
+                    <label for="category3">Travel</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" id="category4" value="Home">
+                    <label for="category4">Home</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="category" id="category5" value="Stationery">
+                    <label for="category5">Stationery</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="filters__subheading">Brand</legend>
+                <div>
+                    <input type="checkbox" name="brand" id="brand1" value="Apple">
+                    <label for="brand1">Apple</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="brand" id="brand2" value="Samsung">
+                    <label for="brand2">Samsung</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="brand" id="brand3" value="Sony">
+                    <label for="brand3">Sony</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="brand" id="brand4" value="Nike">
+                    <label for="brand4">Nike</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="brand" id="brand5" value="Adidas">
+                    <label for="brand5">Adidas</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="filters__subheading">Price Range</legend>
+                <div>
+                    <input type="range" name="price-range" id="price-range" min="0" max="10000" value="10000" list="values">
+                    <datalist class="filters__price-list" id="values">
+                        <option value="0" label="0"></option>
+                        <option value="5000" label="5000"></option>
+                        <option value="10000" label="10000"></option>
+                    </datalist>
+                </div>
+                <div>
+                        <input type="checkbox" name="price" id="price1" value="0-500">
+                        <label for="price1">Under 500</label>
+                </div>
+                <div>
+                        <input type="checkbox" name="price" id="price1" value="500-2000">
+                        <label for="price1">500-2000</label>
+                </div>
+                <div>
+                        <input type="checkbox" name="price" id="price1" value="2000-5000">
+                        <label for="price1">2000-5000</label>
+                </div>
+                <div>
+                        <input type="checkbox" name="price" id="price1" value="5000-10000">
+                        <label for="price1">Above 5000</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="filters__subheading">Rating</legend>
+                <div>
+                    <input type="checkbox" name="rating" id="rating1" value="4.5">
+                    <label for="rating1">4.5+ stars</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="rating" id="rating2" value="4">
+                    <label for="rating2">4+ stars</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="rating" id="rating3" value="3">
+                    <label for="rating3">3+ stars</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="rating" id="rating4" value="2">
+                    <label for="rating4">2+ stars</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="rating" id="rating5" value="1">
+                    <label for="rating5">1+ stars</label>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend class="filters__subheading">Availability</legend>
+                <div>
+                    <input type="radio" name="availability" id="availability1" value="true">
+                    <label for="availability1">In stock only</label>
+                </div>
+                <div>
+                    <input type="radio" name="availability" id="availability2" value="false" checked>
+                    <label for="availability2">Include out of stock</label>
+                </div>
+            </fieldset>
+            <button>Clear all filters</button>
         </aside>
         <section class="products">
             <h1 class="products__heading">Products</h1>
