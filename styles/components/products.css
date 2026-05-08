@@ -30,3 +30,9 @@
     background-color: var(--primary);
     color: var(--background);
 }
+
+.products__container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
