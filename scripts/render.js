@@ -1,6 +1,8 @@
 
 export const renderProducts = (products, productsContainer) => {
 
+    productsContainer.textContent = "";
+
     products.forEach(product => {
         
         const  productCard = document.createElement('article');
