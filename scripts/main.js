@@ -1,19 +1,26 @@
 
 import { loadProducts } from "./data.js";
-import { renderProducts } from "./render.js";
+import { loadFilters, saveFilters } from "./storage.js";
 import { filterProducts } from "./filters.js";
+import { renderProducts } from "./render.js";
 
 const productsContainer = document.querySelector(".products__container");
-const filters = document.querySelector(".filters");
+const filtersContainer = document.querySelector(".filters");
 
 const products = await loadProducts();
 
-renderProducts(products, productsContainer);
+const filters = loadFilters();
 
-filters.addEventListener('click', (event) => {
+// console.log(filters.categories);
 
-    const filteredProducts = filterProducts(products, event);
+const filteredProducts = filterProducts(products, filters);
 
-    renderProducts(filteredProducts, productsContainer);
+renderProducts(filteredProducts, productsContainer);
 
-});
+// filtersContainer.addEventListener('click', (event) => {
+
+//     const filteredProducts = filterProducts(products, event);
+
+//     renderProducts(filteredProducts, productsContainer);
+
+// });
