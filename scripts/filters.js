@@ -89,7 +89,7 @@ export const updateFilters = (filters, event) => {
             return updateRating(filters, event);
 
         case "availability":
-            return updateAvailability();
+            return updateAvailability(filters, event);
 
     } 
 }
@@ -142,63 +142,10 @@ const updateRating = (filters, event) => {
 
 }
 
+const updateAvailability = (filters, event) => {
 
-// export const filterProducts = (products, event) => {
+    const availability = event.target.value === "true" ? true : false;
 
-//     if(event.target.name === "category") {
+    return {...filters, inStock: availability};
 
-//         return event.target.checked ? 
-//                 products.filter(product => product.category === event.target.value) : 
-//                 products;
-
-//     }
-
-//     if(event.target.name === "brand") {
-
-//         return event.target.checked ? 
-//                 products.filter(product => product.brand === event.target.value) : 
-//                 products;
-
-//     }
-    
-//     if(event.target.name === "price") {
-
-//         if(event.target.checked) {
-
-//             const sepIndex = event.target.value.search(/[-]/);
-        
-//             const minPrice = Number(event.target.value.slice(0, sepIndex));
-
-//             const maxPrice = Number(event.target.value.slice(sepIndex + 1));
-
-//             return products.filter(product => (product.price >= minPrice) && (product.price <= maxPrice));
-
-//         }
-
-//         return products;
-        
-//     }
-    
-//     if(event.target.name === "rating") {
-
-//         return event.target.checked ? 
-//             products.filter(product => product.rating >= event.target.value) : 
-//             products;
-
-//     }
-    
-//     if(event.target.name === "availability") {
-
-//         switch(event.target.value) {
-
-//             case "true":
-                
-//                 return products.filter(product => product.inStock);
-
-//             case "false": 
-
-//                 return products;
-
-//         }
-//     }
-// }
+}
