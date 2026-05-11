@@ -9,8 +9,8 @@ export const loadFilters = () => {
             {
                 categories: [],
                 brands: [],
-                price: {min: 0, max: Infinity}, 
-                rating: 1,
+                prices: [], 
+                ratings: [],
                 inStock: false
             };
 

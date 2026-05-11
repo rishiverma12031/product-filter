@@ -1,13 +1,13 @@
 
-export const filterProducts = (products, {categories, brands, price, rating, inStock} ) => {
+export const filterProducts = (products, {categories, brands, prices, ratings, inStock} ) => {
     
     const byCategory = filterByCategory(products, categories);
 
     const byBrand = filterByBrand(byCategory, brands);
 
-    const byPrice = filterByPrice(byBrand, price);
+    const byPrice = filterByPrice(byBrand, prices);
 
-    const byRating = filterByRating(byPrice, rating);
+    const byRating = filterByRating(byPrice, ratings);
 
     const byAvailability = filterByAvailability(byRating, inStock);
 
@@ -40,9 +40,35 @@ const filterByBrand = (products, brands) => {
 
 }
 
-const filterByPrice = (products, price) => products.filter(product => (product.price >= price.min) && (product.price <= price.max));
+const filterByPrice = (products, prices) => {
 
-const filterByRating = (products, rating) => products.filter(product => product.rating >= rating);
+    if(prices.length === 0 || prices === undefined) return products;
+
+    return prices.reduce((filteredProducts, price) => {
+
+        const sepIndex = price.search(/[-]/);
+        
+        const min = Number(price.slice(0, sepIndex));
+
+        const max = Number(price.slice(sepIndex + 1));
+
+        return [...filteredProducts, ...products.filter(product => (product.price >= min) && (product.price <= max))];
+
+    }, []);
+
+}
+
+const filterByRating = (products, ratings) => {
+
+    if(ratings.length === 0 || ratings === undefined) return products;
+
+    return ratings.reduce((filteredProducts, rating) => {
+ 
+        return [...filteredProducts, ...products.filter(product => product.rating >= rating)]; 
+
+    }, []);
+
+}
 
 const filterByAvailability = (products, inStock) => !inStock ? products : products.filter(product => product.inStock);
 
@@ -54,13 +80,13 @@ export const updateFilters = (filters, event) => {
             return updateCategory(filters, event);
 
         case "brand":
-            return updateBrand();
+            return updateBrand(filters, event);
 
         case "price":
-            return updatePrice();
+            return updatePrice(filters, event);
 
         case "rating":
-            return updateRating();
+            return updateRating(filters, event);
 
         case "availability":
             return updateAvailability();
@@ -80,6 +106,41 @@ const updateCategory = (filters, event) => {
 
 } 
 
+const updateBrand = (filters, event) => {
+
+    const value = event.target.value;
+
+    const updatedBrands = filters.brands.includes(value) ? 
+                                filters.brands.filter(brand => brand !== value) : 
+                                [...filters.brands, value] ;
+
+    return {...filters, brands: updatedBrands};
+
+}
+
+const updatePrice = (filters, event) => {
+
+    const value = event.target.value;
+
+    const updatedPrices = filters.prices.includes(value) ? 
+                                filters.prices.filter(price => price !== value) : 
+                                [...filters.prices, value] ;
+
+    return {...filters, prices: updatedPrices};
+
+}
+
+const updateRating = (filters, event) => {
+
+    const value = event.target.value;
+
+    const updatedRatings = filters.ratings.includes(value) ? 
+                                filters.ratings.filter(rating => rating !== value) : 
+                                [...filters.ratings, value] ;
+
+    return {...filters, ratings: updatedRatings};
+
+}
 
 
 // export const filterProducts = (products, event) => {
