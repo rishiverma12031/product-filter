@@ -1,15 +1,15 @@
 
-export const filterProducts = (products, filters) => {
+export const filterProducts = (products, {categories, brands, price, rating, inStock} ) => {
+    
+    const byCategory = filterByCategory(products, categories);
 
-    const byCategory = filterByCategory(products, filters.categories);
+    const byBrand = filterByBrand(byCategory, brands);
 
-    const byBrand = filterByBrand(byCategory, filters.brands);
+    const byPrice = filterByPrice(byBrand, price);
 
-    const byPrice = filterByPrice(byBrand, filters.price);
+    const byRating = filterByRating(byPrice, rating);
 
-    const byRating = filterByRating(byPrice, filters.rating);
-
-    const byAvailability = filterByAvailability(byRating, filters.inStock);
+    const byAvailability = filterByAvailability(byRating, inStock);
 
     return byAvailability;
 
@@ -17,10 +17,11 @@ export const filterProducts = (products, filters) => {
 
 const filterByCategory = (products, categories) => {
 
-    if(categories === undefined) return products;
 
-    categories.reduce((filteredProducts, category) => {
- 
+    if(categories.length === 0 || categories === undefined) return products;
+    
+    return categories.reduce((filteredProducts, category) => {
+
         return [...filteredProducts, ...products.filter(product => product.category === category)]; 
 
     }, []);
@@ -29,9 +30,9 @@ const filterByCategory = (products, categories) => {
 
 const filterByBrand = (products, brands) => {
 
-    if(brands === undefined) return products;
+    if(brands.length === 0 || brands === undefined) return products;
 
-    brands.reduce((filteredProducts, brand) => {
+    return brands.reduce((filteredProducts, brand) => {
  
         return [...filteredProducts, ...products.filter(product => product.brand === brand)]; 
 
@@ -39,84 +40,100 @@ const filterByBrand = (products, brands) => {
 
 }
 
-const filterByPrice = (products, price) => products.filter(product => product.price >= price.min && product.price <= price.max);
+const filterByPrice = (products, price) => products.filter(product => (product.price >= price.min) && (product.price <= price.max));
 
-const filterByRating = (products, rating) => {
+const filterByRating = (products, rating) => products.filter(product => product.rating >= rating);
 
-    if(rating === undefined) return products;
+const filterByAvailability = (products, inStock) => !inStock ? products : products.filter(product => product.inStock);
 
-    return products.filter(product => product.rating >= rating);
+export const updateFilters = (filters, event) => {
 
+    switch(event.target.name) {
+
+        case "category":
+            return updateCategory(filters, event);
+
+        case "brand":
+            return updateBrand();
+
+        case "price":
+            return updatePrice();
+
+        case "rating":
+            return updateRating();
+
+        case "availability":
+            return updateAvailability();
+
+    } 
 }
 
-const filterByAvailability = (products, inStock) => {
+const updateCategory = (filters, event) => {
 
-    if(!inStock) return products;
+    const updatedCategories = [...filters.categories, event.target.value];
 
-    return products.filter(product => product.inStock);
+    return {...filters, categories: [...updatedCategories]};
 
-}
-
-
+} 
 
 
 
 // export const filterProducts = (products, event) => {
 
-    // if(event.target.name === "category") {
+//     if(event.target.name === "category") {
 
-    //     return event.target.checked ? 
-    //             products.filter(product => product.category === event.target.value) : 
-    //             products;
+//         return event.target.checked ? 
+//                 products.filter(product => product.category === event.target.value) : 
+//                 products;
 
-    // }
+//     }
 
-    // if(event.target.name === "brand") {
+//     if(event.target.name === "brand") {
 
-    //     return event.target.checked ? 
-    //             products.filter(product => product.brand === event.target.value) : 
-    //             products;
+//         return event.target.checked ? 
+//                 products.filter(product => product.brand === event.target.value) : 
+//                 products;
 
-    // }
+//     }
     
-    // if(event.target.name === "price") {
+//     if(event.target.name === "price") {
 
-    //     if(event.target.checked) {
+//         if(event.target.checked) {
 
-    //         const sepIndex = event.target.value.search(/[-]/);
+//             const sepIndex = event.target.value.search(/[-]/);
         
-    //         const minPrice = Number(event.target.value.slice(0, sepIndex));
+//             const minPrice = Number(event.target.value.slice(0, sepIndex));
 
-    //         const maxPrice = Number(event.target.value.slice(sepIndex + 1));
+//             const maxPrice = Number(event.target.value.slice(sepIndex + 1));
 
-    //         return products.filter(product => (product.price >= minPrice) && (product.price <= maxPrice));
+//             return products.filter(product => (product.price >= minPrice) && (product.price <= maxPrice));
 
-    //     }
+//         }
 
-    //     return products;
+//         return products;
         
-    // }
+//     }
     
-    // if(event.target.name === "rating") {
+//     if(event.target.name === "rating") {
 
-    //     return event.target.checked ? 
-    //         products.filter(product => product.rating >= event.target.value) : 
-    //         products;
+//         return event.target.checked ? 
+//             products.filter(product => product.rating >= event.target.value) : 
+//             products;
 
-    // }
+//     }
     
-    // if(event.target.name === "availability") {
+//     if(event.target.name === "availability") {
 
-    //     switch(event.target.value) {
+//         switch(event.target.value) {
 
-    //         case "true":
+//             case "true":
                 
-    //             return products.filter(product => product.inStock);
+//                 return products.filter(product => product.inStock);
 
-    //         case "false": 
+//             case "false": 
 
-    //             return products;
+//                 return products;
 
-    //     }
-    // }
+//         }
+//     }
 // }

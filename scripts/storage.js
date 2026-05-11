@@ -1,10 +1,17 @@
 
+export const saveFilters = (filters) => localStorage.setItem('filters', JSON.stringify(filters));
 export const loadFilters = () => {
 
     const filters = localStorage.getItem('filters');
 
-    return filters ? JSON.parse(filters) : {price: {min: 0, max: Infinity}, inStock: false};
+    return filters ? 
+            JSON.parse(filters) : 
+            {
+                categories: [],
+                brands: [],
+                price: {min: 0, max: Infinity}, 
+                rating: 1,
+                inStock: false
+            };
 
 }
-
-export const saveFilters = (filters) => localStorage.setItem('filters', JSON.stringify(filters));
