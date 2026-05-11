@@ -2,7 +2,7 @@
 import { loadProducts } from "./data.js";
 import { loadFilters, saveFilters } from "./storage.js";
 import { filterProducts, updateFilters, clearAllFilters } from "./filters.js";
-import { renderProducts } from "./render.js";
+import { renderProducts, renderFilters } from "./render.js";
 
 const productsContainer = document.querySelector(".products__container");
 const filtersContainer = document.querySelector(".filters__groups");
@@ -13,6 +13,7 @@ let filters = loadFilters();
 
 const filteredProducts = filterProducts(products, filters);
 renderProducts(filteredProducts, productsContainer);
+renderFilters(products, filtersContainer);
 
 filtersContainer.addEventListener('change', (event) => {
 
@@ -31,7 +32,6 @@ clearFiltersBtn.addEventListener('click', (event) => {
 
     const filteredProducts = filterProducts(products, filters);
     renderProducts(filteredProducts, productsContainer);
-
-    //re render filters 
+    renderFilters(products, filtersContainer); 
 
 });
