@@ -70,9 +70,11 @@ export const updateFilters = (filters, event) => {
 
 const updateCategory = (filters, event) => {
 
-    const updatedCategories = [...filters.categories, event.target.value];
+    const value = event.target.value;
 
-    return {...filters, categories: [...updatedCategories]};
+    const updatedCategories = filters.categories.includes(value) ? [...filters.categories] : [...filters.categories, value] ;
+
+    return {...filters, categories: updatedCategories};
 
 } 
 
