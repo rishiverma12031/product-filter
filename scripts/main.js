@@ -14,7 +14,7 @@ console.log(filters);
 const filteredProducts = filterProducts(products, filters);
 renderProducts(filteredProducts, productsContainer);
 
-filtersContainer.addEventListener('click', (event) => {
+filtersContainer.addEventListener('change', (event) => {
 
     filters = updateFilters(filters, event);
     saveFilters(filters);

@@ -72,7 +72,9 @@ const updateCategory = (filters, event) => {
 
     const value = event.target.value;
 
-    const updatedCategories = filters.categories.includes(value) ? [...filters.categories] : [...filters.categories, value] ;
+    const updatedCategories = filters.categories.includes(value) ? 
+                                filters.categories.filter(category => category !== value) : 
+                                [...filters.categories, value] ;
 
     return {...filters, categories: updatedCategories};
 
