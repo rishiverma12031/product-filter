@@ -149,3 +149,15 @@ const updateAvailability = (filters, event) => {
     return {...filters, inStock: availability};
 
 }
+
+export const clearAllFilters = () => {
+
+    return {
+                categories: [],
+                brands: [],
+                prices: [], 
+                ratings: [],
+                inStock: false
+            };
+
+}
