@@ -41,6 +41,8 @@ export const renderProducts = (products, productsContainer) => {
 
 export const renderResultsCount = (totalProducts, displayedProducts, resultsCount) => {
 
+    if(displayedProducts === 0 ) return resultsCount.innerHTML = 'No products match your filters.<br /> Try removing some filters';
+
     resultsCount.textContent = `Showing ${displayedProducts} of ${totalProducts} products`;
 
 }
