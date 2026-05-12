@@ -64,7 +64,7 @@ const filterByRating = (products, ratings) => {
 
     return ratings.reduce((filteredProducts, rating) => {
  
-        return [...filteredProducts, ...products.filter(product => product.rating >= rating)]; 
+        return [...new Set ([...filteredProducts, ...products.filter(product => product.rating >= rating)])];
 
     }, []);
 
@@ -96,11 +96,7 @@ export const updateFilters = (filters, event) => {
 
 const updateCategory = (filters, event) => {
 
-    const value = event.target.value;
-
-    const updatedCategories = filters.categories.includes(value) ? 
-                                filters.categories.filter(category => category !== value) : 
-                                [...filters.categories, value] ;
+    const updatedCategories = updateCheckboxFilterGroup(filters.categories, event);
 
     return {...filters, categories: updatedCategories};
 
@@ -108,11 +104,7 @@ const updateCategory = (filters, event) => {
 
 const updateBrand = (filters, event) => {
 
-    const value = event.target.value;
-
-    const updatedBrands = filters.brands.includes(value) ? 
-                                filters.brands.filter(brand => brand !== value) : 
-                                [...filters.brands, value] ;
+    const updatedBrands = updateCheckboxFilterGroup(filters.brands, event);
 
     return {...filters, brands: updatedBrands};
 
@@ -120,11 +112,7 @@ const updateBrand = (filters, event) => {
 
 const updatePrice = (filters, event) => {
 
-    const value = event.target.value;
-
-    const updatedPrices = filters.prices.includes(value) ? 
-                                filters.prices.filter(price => price !== value) : 
-                                [...filters.prices, value] ;
+    const updatedPrices = updateCheckboxFilterGroup(filters.prices, event);
 
     return {...filters, prices: updatedPrices};
 
@@ -132,11 +120,7 @@ const updatePrice = (filters, event) => {
 
 const updateRating = (filters, event) => {
 
-    const value = event.target.value;
-
-    const updatedRatings = filters.ratings.includes(value) ? 
-                                filters.ratings.filter(rating => rating !== value) : 
-                                [...filters.ratings, value] ;
+    const updatedRatings = updateCheckboxFilterGroup(filters.ratings, event);
 
     return {...filters, ratings: updatedRatings};
 
@@ -147,6 +131,16 @@ const updateAvailability = (filters, event) => {
     const availability = event.target.value === "true" ? true : false;
 
     return {...filters, inStock: availability};
+
+}
+
+const updateCheckboxFilterGroup = (group, event) => {
+
+    const value = event.target.value;
+
+    return group.includes(value) ? 
+                group.filter(element => element !== value) : 
+                [...group, value];
 
 }
 

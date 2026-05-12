@@ -33,7 +33,6 @@ export const renderProducts = (products, productsContainer) => {
         productInStock.classList.add('product__in-stock');
 
         productCard.append(productName, productBrand, productCategory, productPrice, productRating, productInStock);
-
         productsContainer.append(productCard);
 
     });
@@ -45,17 +44,20 @@ export const renderFilters = (products, filtersContainer) => {
     filtersContainer.textContent = "";
 
     const categories = getCategories(products);
+    const categoryGroup = renderGroup(categories, 'Category', 'checkbox');
+    
     const brands = getBrands(products);
+    const brandGroup = renderGroup(brands, 'Brand', 'checkbox');
+    
     const prices = getPrices();
+    const priceGroup = renderGroup(prices, 'Price', 'checkbox');
+    
     const ratings = getRatings();
+    const ratingGroup = renderGroup(ratings, 'Rating', 'checkbox');
+    
     const availability = getAvailability();
-
-    const categoryGroup = renderCategoryGroup(categories);
-    const brandGroup = renderBrandGroup(brands);
-    const priceGroup = renderPriceGroup(prices);
-    const ratingGroup = renderRatingGroup(ratings);
-    const availabilityGroup = renderAvailabilityGroup(availability);
-
+    const availabilityGroup = renderGroup(availability, 'Availability', 'radio');
+    
     filtersContainer.append(categoryGroup, brandGroup, priceGroup, ratingGroup, availabilityGroup);
 
 }
@@ -86,81 +88,67 @@ const getRatings = () => ["4.5", "4"];
 
 const getAvailability = () => ["true", "false"];
 
-const renderCategoryGroup = (categories) => {
+const renderGroup = (groupList, groupName, type) => {
 
-    const categoryGroup = document.createElement('fieldset');
+    const group = document.createElement('fieldset');
     
-    const categoryLegend = document.createElement('legend');
-    categoryLegend.classList.add('filters__subheading');
-    categoryLegend.textContent = "Category";
+    const groupLegend = document.createElement('legend');
+    groupLegend.classList.add('filters__subheading');
+    groupLegend.textContent = groupName;
 
-    categoryGroup.append(categoryLegend);
+    group.append(groupLegend);
 
-    categories.forEach((category, index) => {
+    const elementName = groupName.toLowerCase();
 
-        const categoryDiv = document.createElement('div');
+    groupList.forEach((element, index) => {
 
-        const categoryCheckbox = document.createElement('input');
-        categoryCheckbox.type = "checkbox";
-        categoryCheckbox.name = "category";
-        categoryCheckbox.id = `category${index + 1}`;
-        categoryCheckbox.value = category;
+        const elementDiv = document.createElement('div');
 
-        const categoryLabel = document.createElement('label');
-        categoryLabel.htmlFor = `category${index + 1}`;
-        categoryLabel.textContent = category;
+        const elementBox = document.createElement('input');
+        elementBox.type = type;
+        elementBox.name = elementName;
+        elementBox.id = `${elementName}${index + 1}`;
+        elementBox.value = element;
+
+        if(elementName === "availability") elementBox.checked = element === "false" ? true : false;
+
+        const elementLabel = document.createElement('label');
+        elementLabel.htmlFor = `${elementName}${index + 1}`;
+        elementLabel.textContent = getText(elementName, element);
         
-        categoryDiv.append(categoryCheckbox, categoryLabel);
-        categoryGroup.append(categoryDiv);
+        elementDiv.append(elementBox, elementLabel);
+        group.append(elementDiv);
 
     });
 
-    return categoryGroup;
+    return group;
 
 }
 
-const renderBrandGroup = (brands) => {
+const getText = (elementName, element) => {
 
-    const brandGroup = document.createElement('fieldset');
-    
-    const brandLegend = document.createElement('legend');
-    brandLegend.classList.add('filters__subheading');
-    brandLegend.textContent = "Brand";
+    switch (elementName) {
 
-    brandGroup.append(brandLegend);
+        case 'category':
+            return element;
 
-    brands.forEach((brand, index) => {
+        case 'brand':
+            return element;
 
-        const brandDiv = document.createElement('div');
-
-        const brandCheckbox = document.createElement('input');
-        brandCheckbox.type = "checkbox";
-        brandCheckbox.name = "brand";
-        brandCheckbox.id = `brand${index + 1}`;
-        brandCheckbox.value = brand;
-
-        const brandLabel = document.createElement('label');
-        brandLabel.htmlFor = `brand${index + 1}`;
-        brandLabel.textContent = brand;
+        case 'price':
+            return element === "0-500" ? "Under 500" : element === "5000-Infinity" ? "Above 5000" : element;
         
-        brandDiv.append(brandCheckbox, brandLabel);
-        brandGroup.append(brandDiv);
+        case 'rating':
+            return `${element}+ stars`;;
+        
+        case 'availability':
+            return element === "true" ? "In stock only" : "Include out of stock";
 
-    });
-
-    return brandGroup;
+    }
 
 }
 
-const renderPriceGroup = (prices) => {
-
-    const priceGroup = document.createElement('fieldset');
-    
-    const priceLegend = document.createElement('legend');
-    priceLegend.classList.add('filters__subheading');
-    priceLegend.textContent = "Price Range";
-
-    priceGroup.append(priceLegend);
+// Price Slider
 
     // const priceDiv = document.createElement('div');
 
@@ -188,93 +176,3 @@ const renderPriceGroup = (prices) => {
     // priceList.append(priceListStart, priceListEnd);
     // priceDiv.append(priceRange, priceList);
     // priceGroup.append(priceDiv);
-
-    prices.forEach((price, index) => {
-
-        const priceDiv = document.createElement('div');
-
-        const priceCheckbox = document.createElement('input');
-        priceCheckbox.type = "checkbox";
-        priceCheckbox.name = "price";
-        priceCheckbox.id = `price${index + 1}`;
-        priceCheckbox.value = price;
-
-        const priceLabel = document.createElement('label');
-        priceLabel.htmlFor = `price${index + 1}`;
-        priceLabel.textContent = price === "0-500" ? "Under 500" : price === "5000-Infinity" ? "Above 5000" : price;
-        
-        priceDiv.append(priceCheckbox, priceLabel);
-        priceGroup.append(priceDiv);
-
-    });
-
-    return priceGroup;
-
-}
-
-const renderRatingGroup = (ratings) => {
-
-    const ratingGroup = document.createElement('fieldset');
-    
-    const ratingLegend = document.createElement('legend');
-    ratingLegend.classList.add('filters__subheading');
-    ratingLegend.textContent = "Rating";
-
-    ratingGroup.append(ratingLegend);
-
-    ratings.forEach((rating, index) => {
-
-        const ratingDiv = document.createElement('div');
-
-        const ratingCheckbox = document.createElement('input');
-        ratingCheckbox.type = "checkbox";
-        ratingCheckbox.name = "rating";
-        ratingCheckbox.id = `rating${index + 1}`;
-        ratingCheckbox.value = rating;
-
-        const ratingLabel = document.createElement('label');
-        ratingLabel.htmlFor = `rating${index + 1}`;
-        ratingLabel.textContent = `${rating}+ stars`;
-        
-        ratingDiv.append(ratingCheckbox, ratingLabel);
-        ratingGroup.append(ratingDiv);
-
-    });
-
-    return ratingGroup;
-
-}
-
-const renderAvailabilityGroup = (availability) => {
-
-    const availabilityGroup = document.createElement('fieldset');
-    
-    const availabilityLegend = document.createElement('legend');
-    availabilityLegend.classList.add('filters__subheading');
-    availabilityLegend.textContent = "Availability";
-
-    availabilityGroup.append(availabilityLegend);
-
-    availability.forEach((availability, index) => {
-
-        const availabilityDiv = document.createElement('div');
-
-        const availabilityRadio = document.createElement('input');
-        availabilityRadio.type = "radio";
-        availabilityRadio.name = "availability";
-        availabilityRadio.id = `availability${index + 1}`;
-        availabilityRadio.value = availability;
-        availabilityRadio.checked = availability === "false" ? true : false;
-
-        const availabilityLabel = document.createElement('label');
-        availabilityLabel.htmlFor = `availability${index + 1}`;
-        availabilityLabel.textContent = availability === "true" ? "In stock only" : "Include out of stock";
-        
-        availabilityDiv.append(availabilityRadio, availabilityLabel);
-        availabilityGroup.append(availabilityDiv);
-
-    });
-
-    return availabilityGroup;
-
-}
