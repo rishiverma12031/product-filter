@@ -39,6 +39,12 @@ export const renderProducts = (products, productsContainer) => {
 
 }
 
+export const renderResultsCount = (totalProducts, displayedProducts, resultsCount) => {
+
+    resultsCount.textContent = `Showing ${displayedProducts} of ${totalProducts} products`;
+
+}
+
 export const renderFilters = (products, filtersContainer) => {
 
     filtersContainer.textContent = "";
