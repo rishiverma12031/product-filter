@@ -1,7 +1,7 @@
 
 import { loadProducts } from "./data.js";
 import { loadFilters, saveFilters } from "./storage.js";
-import { filterProducts, updateFilters, clearAllFilters } from "./filters.js";
+import { filterProducts, updateFilters, clearSearch, clearAllFilters } from "./filters.js";
 import { renderProducts, renderFilters } from "./render.js";
 
 const productsContainer = document.querySelector(".products__container");
@@ -19,29 +19,25 @@ renderFilters(products, filtersContainer);
 
 searchBar.addEventListener('input', (event) => {
 
-    const input = toTitleCase(event.target.value);
+    filters = updateFilters(filters, event);
+    saveFilters(filters);
 
-    const filteredProducts = products.filter(product => product.name.includes(input));
+    const filteredProducts = filterProducts(products, filters);
     renderProducts(filteredProducts, productsContainer);
 
 });
 
-clearSearchBtn.addEventListener('click', (event) => {
+clearSearchBtn.addEventListener('click', () => {
+
+    filters = clearSearch(filters);
+    saveFilters(filters);
+
+    const filteredProducts = filterProducts(products, filters);
+    renderProducts(filteredProducts, productsContainer);
 
     searchBar.value = "";
-    renderProducts(products, productsContainer);
 
 });
-
-function toTitleCase(input) {
-
-    return input.trim()
-        .toLowerCase()
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-
-}
 
 filtersContainer.addEventListener('change', (event) => {
 
@@ -53,9 +49,9 @@ filtersContainer.addEventListener('change', (event) => {
 
 });
 
-clearFiltersBtn.addEventListener('click', (event) => {
+clearFiltersBtn.addEventListener('click', () => {
 
-    filters = clearAllFilters();
+    filters = clearAllFilters(filters);
     saveFilters(filters);
 
     const filteredProducts = filterProducts(products, filters);

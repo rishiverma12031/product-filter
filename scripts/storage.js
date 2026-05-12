@@ -7,6 +7,7 @@ export const loadFilters = () => {
     return filters ? 
             JSON.parse(filters) : 
             {
+                searchInput: '',
                 categories: [],
                 brands: [],
                 prices: [], 

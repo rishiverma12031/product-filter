@@ -1,7 +1,9 @@
 
-export const filterProducts = (products, {categories, brands, prices, ratings, inStock} ) => {
+export const filterProducts = (products, {searchInput, categories, brands, prices, ratings, inStock} ) => {
     
-    const byCategory = filterByCategory(products, categories);
+    const bySearch = filterBySearch(products, searchInput);
+    
+    const byCategory = filterByCategory(bySearch, categories);
 
     const byBrand = filterByBrand(byCategory, brands);
 
@@ -12,6 +14,14 @@ export const filterProducts = (products, {categories, brands, prices, ratings, i
     const byAvailability = filterByAvailability(byRating, inStock);
 
     return byAvailability;
+
+}
+
+const filterBySearch = (products, searchInput) => {
+
+    const formattedInput = toTitleCase(searchInput);
+    
+    return products.filter(product => product.name.includes(formattedInput));
 
 }
 
@@ -72,9 +82,22 @@ const filterByRating = (products, ratings) => {
 
 const filterByAvailability = (products, inStock) => !inStock ? products : products.filter(product => product.inStock);
 
+const toTitleCase = (input) => {
+
+    return input.trim()
+        .toLowerCase()
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+
+}
+
 export const updateFilters = (filters, event) => {
 
     switch(event.target.name) {
+
+        case "searchbar":
+            return updateSearchInput(filters, event);
 
         case "category":
             return updateCategory(filters, event);
@@ -92,6 +115,14 @@ export const updateFilters = (filters, event) => {
             return updateAvailability(filters, event);
 
     } 
+}
+
+const updateSearchInput = (filters, event) => {
+
+    const newInput = event.target.value;
+
+    return {...filters, searchInput: newInput};
+
 }
 
 const updateCategory = (filters, event) => {
@@ -144,9 +175,14 @@ const updateCheckboxFilterGroup = (group, event) => {
 
 }
 
-export const clearAllFilters = () => {
+export const clearSearch = (filters) => {
 
-    return {
+    return {...filters, searchInput: ''};
+}
+
+export const clearAllFilters = (filters) => {
+
+    return {...filters,
                 categories: [],
                 brands: [],
                 prices: [], 
