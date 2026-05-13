@@ -1,3 +1,4 @@
+import { formatPrice } from "./utils.js";
 
 export const renderProducts = (products, productsContainer) => {
 
@@ -21,7 +22,7 @@ export const renderProducts = (products, productsContainer) => {
         productCategory.classList.add('product__category');
 
         const productPrice = document.createElement('p');
-        productPrice.textContent = product.price;
+        productPrice.textContent = formatPrice(product.price);
         productPrice.classList.add('product__price');
 
         const productRating = document.createElement('p');
