@@ -37,12 +37,7 @@
 }
 
 .product__rating {
-    background-color: var(--background);
-    color: var(--primary);
-    padding: 0.125rem 0.25rem;
-    width: fit-content;
-    border-radius: 4px;
-    font-size: 0.75rem;
+    font-size: 0.9rem;
 }
 
 .product__in-stock {

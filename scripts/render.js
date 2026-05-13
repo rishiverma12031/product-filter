@@ -1,4 +1,4 @@
-import { formatPrice } from "./utils.js";
+import { formatPrice, formatRating } from "./utils.js";
 
 export const renderProducts = (products, productsContainer) => {
 
@@ -26,7 +26,7 @@ export const renderProducts = (products, productsContainer) => {
         productPrice.classList.add('product__price');
 
         const productRating = document.createElement('p');
-        productRating.textContent = product.rating;
+        productRating.textContent = formatRating(product.rating);
         productRating.classList.add('product__rating');
 
         const productInStock = document.createElement('p');
