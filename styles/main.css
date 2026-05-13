@@ -6,8 +6,9 @@
 
 @import url(./components/filters.css);
 @import url(./components/products.css);
-
 @import url(./components/card.css);
+
+@import url(./components/utils.css);
 
 .main {
     display: grid;

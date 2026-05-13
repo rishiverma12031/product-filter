@@ -8,7 +8,7 @@ const productsContainer = document.querySelector(".products__container");
 const searchBar = document.querySelector(".products__searchbar");
 const clearSearchBtn = document.querySelector(".products__button");
 const filtersContainer = document.querySelector(".filters__groups");
-const clearFiltersBtn = document.querySelector(".filters__button");
+const clearFiltersBtn = document.querySelector(".filters__button--clear");
 const resultsCount = document.querySelector(".products__count");
 
 const products = await loadProducts();

@@ -10,8 +10,25 @@
     font-weight: 700;
 }
 
+.filters__dropdown {
+    border: 2px solid black;
+}
+
+.filters__subheading-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filters__button--dropdown {
+    
+}
+
 .filters__subheading {
     font-weight: 700;
+}
+
+.filters__dropdown-menu {
+    padding-left: 1rem;
 }
 
 .filters__price-list {

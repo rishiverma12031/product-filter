@@ -109,13 +109,32 @@ const getAvailability = () => ["true", "false"];
 
 const renderGroup = (groupList, groupName, type) => {
 
-    const group = document.createElement('fieldset');
-    
-    const groupLegend = document.createElement('legend');
-    groupLegend.classList.add('filters__subheading');
-    groupLegend.textContent = groupName;
+    const group = document.createElement('div');
+    group.classList.add('filters__dropdown');
 
-    group.append(groupLegend);
+    const groupTitleDiv = document.createElement('div');
+    groupTitleDiv.classList.add('filters__subheading-container');
+
+    const dropdownBtn = document.createElement('button');
+    dropdownBtn.classList.add('filters__button--dropdown');
+    dropdownBtn.textContent = '▶';
+
+    const groupTitle = document.createElement('p');
+    groupTitle.classList.add('filters__subheading');
+    groupTitle.textContent = groupName;
+
+    groupTitleDiv.append(dropdownBtn, groupTitle);
+    group.append(groupTitleDiv);
+
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.classList.add('filters__dropdown-menu', 'hidden');
+    
+    dropdownBtn.addEventListener('click', () => {
+        
+        dropdownMenu.classList.toggle('hidden');
+        dropdownBtn.textContent === '▶' ? dropdownBtn.textContent = '▼' : dropdownBtn.textContent = '▶';
+
+    });
 
     const elementName = groupName.toLowerCase();
 
@@ -123,22 +142,24 @@ const renderGroup = (groupList, groupName, type) => {
 
         const elementDiv = document.createElement('div');
 
-        const elementBox = document.createElement('input');
-        elementBox.type = type;
-        elementBox.name = elementName;
-        elementBox.id = `${elementName}${index + 1}`;
-        elementBox.value = element;
+        const elementInput = document.createElement('input');
+        elementInput.type = type;
+        elementInput.name = elementName;
+        elementInput.id = `${elementName}${index + 1}`;
+        elementInput.value = element;
 
-        if(elementName === "availability") elementBox.checked = element === "false" ? true : false;
+        if(elementName === "availability") elementInput.checked = element === "false" ? true : false;
 
         const elementLabel = document.createElement('label');
         elementLabel.htmlFor = `${elementName}${index + 1}`;
         elementLabel.textContent = getText(elementName, element);
         
-        elementDiv.append(elementBox, elementLabel);
-        group.append(elementDiv);
+        elementDiv.append(elementInput, elementLabel);
+        dropdownMenu.append(elementDiv);
 
     });
+
+    group.append(dropdownMenu);
 
     return group;
 
