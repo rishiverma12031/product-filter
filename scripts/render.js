@@ -9,6 +9,20 @@ export const renderProducts = (products, productsContainer) => {
         const  productCard = document.createElement('article');
         productCard.classList.add('product');
 
+        const productInStock = document.createElement('p');
+        productInStock.textContent = product.inStock ? '• In Stock' : '✕ Out of Stock';
+        
+        if(!product.inStock) {
+
+            productCard.classList.add('product--sold-out');
+            productInStock.classList.add('product__out-stock');
+        
+        }
+
+        else {
+            productInStock.classList.add('product__in-stock');
+        }
+
         const productName = document.createElement('p');
         productName.textContent = product.name;
         productName.classList.add('product__name');
@@ -29,11 +43,7 @@ export const renderProducts = (products, productsContainer) => {
         productRating.textContent = formatRating(product.rating);
         productRating.classList.add('product__rating');
 
-        const productInStock = document.createElement('p');
-        productInStock.textContent = product.inStock ? 'In Stock' : 'Out of Stock';
-        productInStock.classList.add('product__in-stock');
-
-        productCard.append(productName, productBrand, productCategory, productPrice, productRating, productInStock);
+        productCard.append(productInStock, productName, productBrand, productCategory, productPrice, productRating);
         productsContainer.append(productCard);
 
     });
