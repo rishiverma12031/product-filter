@@ -11,7 +11,7 @@
 }
 
 .filters__dropdown {
-    border: 2px solid black;
+
 }
 
 .filters__subheading-container {
@@ -20,7 +20,13 @@
 }
 
 .filters__button--dropdown {
-    
+    background-color: var(--background);
+    border: none;
+    transition: transform 0.05s ease-in-out;
+}
+
+.filters__button--dropdown:active {
+    transform: rotate(90deg);
 }
 
 .filters__subheading {
@@ -28,7 +34,7 @@
 }
 
 .filters__dropdown-menu {
-    padding-left: 1rem;
+    padding: 0.5rem 0 0.5rem 1rem;
 }
 
 .filters__price-list {
@@ -36,4 +42,12 @@
     justify-content: space-between;
     font-size: 0.625rem;
     padding: 0 0.25rem;
+}
+
+.filters__button--close {
+
+    position: fixed;
+    top: 2rem;
+    right: 1rem;
+
 }

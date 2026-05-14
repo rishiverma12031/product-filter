@@ -7,27 +7,46 @@
     <title>Product Filter</title>
 </head>
 <body>
+
     <header class="header">
         <p class="header__title">
             Product Filter
         </p>
     </header>
+
     <main class="main">
-        <aside class="filters">
-            <p class="filters__heading">Filters</p>
-            <div class="filters__groups"></div>
-            <button class="filters__button--clear">Clear all filters</button>
-        </aside>
-        <section class="products">
-            <h1 class="products__heading">Products</h1>
-            <div class="products__search">
-                <input class="products__searchbar" type="text" name="searchbar" id="searchbar" placeholder="Type here to search...">
-                <button class="products__button">Clear</button>
-            </div>
-            <p class="products__count"></p>
-            <div class="products__container"></div>
-        </section>
+
+        <button class="filters-toggle-button">Filters</button>
+
+        <div class="backdrop hidden"></div>
+        
+        <div class="layout">
+        
+            <aside class="filters">
+                <p class="filters__heading">Filters</p>
+                <div class="filters__groups"></div>
+                <button class="filters__button--clear">Clear all filters</button>
+                <button class="filters__button--close">✕</button>
+            </aside>
+        
+            <section class="products">
+                
+                <h1 class="products__heading">Products</h1>
+                
+                <div class="products__search">
+                    <input class="products__searchbar" type="text" name="searchbar" id="searchbar" placeholder="Type here to search...">
+                    <button class="products__button">Clear</button>
+                </div>
+                
+                <p class="products__count"></p>
+                <div class="products__container"></div>
+            
+            </section>
+        
+        </div>
+    
     </main>
+
     <footer class="footer">
         <p>
             Made with ❤️ by 
@@ -36,6 +55,8 @@
             </a>
         </p>
     </footer>
+    
     <script type="module" src="./scripts/main.js"></script>
+
 </body>
 </html>
