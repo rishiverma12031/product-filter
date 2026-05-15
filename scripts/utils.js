@@ -2,8 +2,9 @@
 export const formatPrice = (price) => {
 
     const thousandPlaceValue = Math.floor(price / 1000);
+    const uptoHunderedPlaceValue = price % 1000 === 0 ? "000" : price % 1000;
 
-    return (thousandPlaceValue ? `₹${thousandPlaceValue},${price % 1000}` : `₹${price}`); 
+    return (thousandPlaceValue ? `₹${thousandPlaceValue},${uptoHunderedPlaceValue}` : `₹${price}`); 
 
 }
 
