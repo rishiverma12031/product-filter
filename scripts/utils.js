@@ -24,3 +24,5 @@ export const formatRating = (rating) => {
     return `${rating} ${stars}`;
 
 }
+
+export const getMaxPrice = (products) => Math.max(...products.map(product => product.price));

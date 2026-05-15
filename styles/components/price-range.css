@@ -1,0 +1,17 @@
+.price-range {
+}
+
+.price-range__slider {
+    width: 160px;
+    margin: 0;
+}
+
+.price-range__list {
+    display: flex;
+    justify-content: space-between;
+    width: 160px;
+}
+
+.price-range__option {
+    padding: 0;
+}

@@ -1,4 +1,4 @@
-import { formatPrice, formatRating } from "./utils.js";
+import { formatPrice, formatRating, getMaxPrice } from "./utils.js";
 
 export const renderProducts = (products, productsContainer) => {
 
@@ -69,7 +69,7 @@ export const renderFilters = (products, filtersContainer) => {
     const brandGroup = renderGroup(brands, 'Brand', 'checkbox');
     
     const prices = getPrices();
-    const priceGroup = renderGroup(prices, 'Price', 'checkbox');
+    const priceGroup = renderGroup(prices, 'Price', 'checkbox', products);
     
     const ratings = getRatings();
     const ratingGroup = renderGroup(ratings, 'Rating', 'checkbox');
@@ -107,7 +107,7 @@ const getRatings = () => ["4.5", "4"];
 
 const getAvailability = () => ["true", "false"];
 
-const renderGroup = (groupList, groupName, type) => {
+const renderGroup = (groupList, groupName, type, products) => {
 
     const group = document.createElement('div');
     group.classList.add('filters__dropdown');
@@ -135,6 +135,13 @@ const renderGroup = (groupList, groupName, type) => {
         dropdownBtn.textContent === '▶' ? dropdownBtn.textContent = '▼' : dropdownBtn.textContent = '▶';
 
     });
+
+    if (groupName === 'Price') {
+
+        const priceSlider = getSlider(products);
+        dropdownMenu.append(priceSlider);
+
+    };
 
     const elementName = groupName.toLowerCase();
 
@@ -188,31 +195,39 @@ const getText = (elementName, element) => {
 
 }
 
-// Price Slider
+const getSlider = (products) => {
 
-    // const priceDiv = document.createElement('div');
+    const priceRange = document.createElement('div');
+    priceRange.classList.add('price-range');
 
-    // const priceRange = document.createElement('input');
-    // priceRange.type = "range";
-    // priceRange.name = "price-range";
-    // priceRange.id = "price-range";
-    // priceRange.min = "0";
-    // priceRange.max = "50000";
-    // priceRange.value = "50000";
-    // priceRange.list = "values";
+    const slider = document.createElement('input');
+    slider.classList.add('price-range__slider');
+    slider.type = "range";
+    slider.name = "min-slider";
+    slider.id = "min-slider";
+    slider.min = "0";
+    slider.max = getMaxPrice(products);
+    slider.value = getMaxPrice(products);
 
-    // const priceList = document.createElement('datalist');
-    // priceList.classList.add('filters__price-list');
-    // priceList.id = "values";
+    const priceList = document.createElement('div');
+    priceList.classList.add('price-range__list');
 
-    // const priceListStart = document.createElement('option');
-    // priceListStart.value = "0";
-    // priceListStart.label = "0";
+    const priceListStart = document.createElement('span');
+    priceListStart.classList.add('price-range__option');
+    priceListStart.textContent = "0";
 
-    // const priceListEnd = document.createElement('option');
-    // priceListEnd.value = "50000";
-    // priceListEnd.label = "50000";
+    const priceListEnd = document.createElement('span');
+    priceListEnd.classList.add('price-range__option');
+    priceListEnd.textContent = "max";
 
-    // priceList.append(priceListStart, priceListEnd);
-    // priceDiv.append(priceRange, priceList);
-    // priceGroup.append(priceDiv);
+    const price = document.createElement('output');
+    price.textContent = `Price: 0 to ${formatPrice(slider.value)}`;
+    slider.addEventListener('input', () => price.textContent = `Price: 0 to ${formatPrice(slider.value)}`);
+
+    priceList.append(priceListStart, priceListEnd);    
+    priceRange.append(slider, priceList, price);
+
+    return priceRange;
+
+}
+
