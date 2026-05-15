@@ -203,8 +203,8 @@ const getSlider = (products) => {
     const slider = document.createElement('input');
     slider.classList.add('price-range__slider');
     slider.type = "range";
-    slider.name = "min-slider";
-    slider.id = "min-slider";
+    slider.name = "slider";
+    slider.id = "slider";
     slider.min = "0";
     slider.max = getMaxPrice(products);
     slider.value = getMaxPrice(products);

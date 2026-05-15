@@ -19,7 +19,7 @@ const closeFiltersBtn = document.querySelector(".filters__button--close");
 const resultsCount = document.querySelector(".products__count");
 
 const products = await loadProducts();
-let filters = loadFilters();
+let filters = loadFilters(products);
 
 const filteredProducts = filterProducts(products, filters);
 renderProducts(filteredProducts, productsContainer);
@@ -87,7 +87,7 @@ filtersContainer.addEventListener('change', (event) => {
 
 clearFiltersBtn.addEventListener('click', () => {
 
-    filters = clearAllFilters(filters);
+    filters = clearAllFilters(filters, products);
     saveFilters(filters);
 
     const filteredProducts = filterProducts(products, filters);

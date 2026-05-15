@@ -1,5 +1,6 @@
+import { getMaxPrice } from "./utils.js";
 
-export const filterProducts = (products, {searchInput, categories, brands, prices, ratings, inStock} ) => {
+export const filterProducts = (products, {searchInput, categories, brands, slider, prices, ratings, inStock} ) => {
     
     const bySearch = filterBySearch(products, searchInput);
     
@@ -7,7 +8,9 @@ export const filterProducts = (products, {searchInput, categories, brands, price
 
     const byBrand = filterByBrand(byCategory, brands);
 
-    const byPrice = filterByPrice(byBrand, prices);
+    const bySlider = filterBySlider(byBrand, slider);
+
+    const byPrice = filterByPrice(bySlider, prices);
 
     const byRating = filterByRating(byPrice, ratings);
 
@@ -49,6 +52,8 @@ const filterByBrand = (products, brands) => {
     }, []);
 
 }
+
+const filterBySlider = (products, slider) => products.filter(product => product.price <= slider);
 
 const filterByPrice = (products, prices) => {
 
@@ -105,6 +110,9 @@ export const updateFilters = (filters, event) => {
         case "brand":
             return updateBrand(filters, event);
 
+        case "slider":
+            return updateSlider(filters, event);
+
         case "price":
             return updatePrice(filters, event);
 
@@ -141,6 +149,14 @@ const updateBrand = (filters, event) => {
 
 }
 
+const updateSlider = (filters, event) => {
+
+    const slider = document.querySelector(".price-range__slider");
+
+    const updatedSlider = slider.value;
+
+    return {...filters, slider: updatedSlider};
+}
 const updatePrice = (filters, event) => {
 
     const updatedPrices = updateCheckboxFilterGroup(filters.prices, event);
@@ -180,11 +196,12 @@ export const clearSearch = (filters) => {
     return {...filters, searchInput: ''};
 }
 
-export const clearAllFilters = (filters) => {
+export const clearAllFilters = (filters, products) => {
 
     return {...filters,
                 categories: [],
                 brands: [],
+                slider: getMaxPrice(products),
                 prices: [], 
                 ratings: [],
                 inStock: false
