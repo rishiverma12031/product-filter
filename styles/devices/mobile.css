@@ -1,21 +1,27 @@
+
 @media (max-width: 768px) {
     
     .layout {
         grid-template-columns: 1fr;
-        padding-left: 2rem ;
     }
 
     .filters-toggle-button {
         position: fixed;
-        top: calc(50% - 3rem);
+        top: calc(50% - 10rem);
         left: 0;
-        padding: 2rem 0.5rem;
+        padding: 10rem 0.5rem;
         color: var(--background);
         background-color: var(--primary);
         font-size: 1rem;
         writing-mode: vertical-rl;
         border: none;
-        border-radius: 0rem 1rem 1rem 0rem;
+        border-radius: 0rem 100% 100% 0; 
+    }
+
+    .filters-toggle-button:active {
+        transform: scale(0.98);
+        background-color: color-mix(in oklch, var(--primary), transparent 20%);
+        transition: none;
     }
 
     .backdrop {
@@ -31,7 +37,7 @@
         left: 0;
         height: 100vh;
         width: 210px;
-        background-color: var(--background);
+        background-color: color-mix(in oklch, var(--background), black 5%);
         transform: translateX(-100%);
         transition: transform 0.3s ease;
         z-index: 2;
@@ -39,6 +45,14 @@
 
     .filters--open {
         transform: translateX(0);
+    }
+
+    .products__container {
+        margin-left: 2rem;
+    }
+
+    .product {
+        flex-grow: 1;
     }
 
 }
