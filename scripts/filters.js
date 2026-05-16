@@ -1,4 +1,5 @@
-import { getMaxPrice } from "./utils.js";
+
+import { getMaxPrice, toTitleCase } from "./utils.js";
 
 export const filterProducts = (products, {searchInput, categories, brands, slider, prices, ratings, inStock} ) => {
     
@@ -30,8 +31,7 @@ const filterBySearch = (products, searchInput) => {
 
 const filterByCategory = (products, categories) => {
 
-
-    if(categories.length === 0 || categories === undefined) return products;
+    if(checkEmpty(categories)) return products;
     
     return categories.reduce((filteredProducts, category) => {
 
@@ -43,7 +43,7 @@ const filterByCategory = (products, categories) => {
 
 const filterByBrand = (products, brands) => {
 
-    if(brands.length === 0 || brands === undefined) return products;
+    if(checkEmpty(brands)) return products;
 
     return brands.reduce((filteredProducts, brand) => {
  
@@ -57,7 +57,7 @@ const filterBySlider = (products, slider) => products.filter(product => product.
 
 const filterByPrice = (products, prices) => {
 
-    if(prices.length === 0 || prices === undefined) return products;
+    if(checkEmpty(prices)) return products;
 
     return prices.reduce((filteredProducts, price) => {
 
@@ -75,7 +75,7 @@ const filterByPrice = (products, prices) => {
 
 const filterByRating = (products, ratings) => {
 
-    if(ratings.length === 0 || ratings === undefined) return products;
+    if(checkEmpty(ratings)) return products;
 
     return ratings.reduce((filteredProducts, rating) => {
  
@@ -87,15 +87,7 @@ const filterByRating = (products, ratings) => {
 
 const filterByAvailability = (products, inStock) => !inStock ? products : products.filter(product => product.inStock);
 
-const toTitleCase = (input) => {
-
-    return input.trim()
-        .toLowerCase()
-        .split(' ')
-        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(' ');
-
-}
+const checkEmpty = (filterGroup) => (filterGroup.length === 0 || filterGroup === undefined);
 
 export const updateFilters = (filters, event) => {
 

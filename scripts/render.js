@@ -1,3 +1,4 @@
+
 import { formatPrice, formatRating, getMaxPrice } from "./utils.js";
 
 export const renderProducts = (products, productsContainer) => {
@@ -52,7 +53,9 @@ export const renderProducts = (products, productsContainer) => {
 
 export const renderResultsCount = (totalProducts, displayedProducts, resultsCount) => {
 
-    if(displayedProducts === 0 ) return resultsCount.innerHTML = 'No products match your filters.<br /> Try removing some filters';
+    const noResultsText = 'No products match your filters.<br /> Try removing some filters';
+
+    if(displayedProducts === 0 ) return resultsCount.innerHTML = noResultsText;
 
     resultsCount.textContent = `Showing ${displayedProducts} of ${totalProducts} products`;
 
@@ -103,7 +106,7 @@ const getBrands = (products) => {
 
 const getPrices = () => ["0-500", "500-2000", "2000-5000", "5000-Infinity"];
 
-const getRatings = () => ["4.5", "4"];
+const getRatings = () => ["4.5", "4" , "3"];
 
 const getAvailability = () => ["true", "false"];
 
@@ -230,4 +233,3 @@ const getSlider = (products) => {
     return priceRange;
 
 }
-

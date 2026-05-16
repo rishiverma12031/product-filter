@@ -1,3 +1,4 @@
+
 import { getMaxPrice } from "./utils.js";
 
 export const saveFilters = (filters) => localStorage.setItem('filters', JSON.stringify(filters));
