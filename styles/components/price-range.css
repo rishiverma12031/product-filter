@@ -1,17 +1,19 @@
+
 .price-range {
+    padding: 1rem 0;
 }
 
 .price-range__slider {
-    width: 160px;
-    margin: 0;
+    width: calc-size(200px - 1.5rem);
 }
 
 .price-range__list {
     display: flex;
     justify-content: space-between;
-    width: 160px;
+    width: calc-size(200px - 1.5rem);
+    margin-bottom: 0.5rem;
 }
 
 .price-range__option {
-    padding: 0;
+    font-size: 0.75rem;
 }

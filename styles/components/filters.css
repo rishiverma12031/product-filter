@@ -1,13 +1,19 @@
+
 .filters {
     display: flex;
     flex-direction: column;
     padding: 2rem 1rem;
     gap: 1rem;
+    background-color: color-mix(in oklch, var(--primary), transparent 80%);
 }
 
 .filters__heading {
     font-size: 1.5rem;
     font-weight: 700;
+}
+
+.filters__groups {
+    margin-left: 0.5rem;
 }
 
 .filters__dropdown {
@@ -20,9 +26,20 @@
 }
 
 .filters__button--dropdown {
-    background-color: var(--background);
+    background-color: transparent;
     border: none;
-    transition: transform 0.05s ease-in-out;
+    transition: background-color 0.2s ease-in-out, transform 0.05s ease;
+}
+
+.filters__button--dropdown:hover {
+    transform: scale(1.2);
+}
+
+.filters__button--dropdown:focus-visible {
+    outline: none;
+    border-top: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    border-left: 4px solid black;
 }
 
 .filters__button--dropdown:active {
@@ -34,7 +51,38 @@
 }
 
 .filters__dropdown-menu {
-    padding: 0.5rem 0 0.5rem 1rem;
+    margin-left: 1rem;
+    padding: 0.5rem 0;
+}
+
+.filters__option {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filters__button--clear {
+    background-color: var(--primary);
+    color: var(--background);
+    border: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+.filters__button--clear:hover {
+    background-color: color-mix(in oklch, var(--primary), black 20%);
+    transform: translateY(-1px);
+}
+
+.filters__button--clear:focus-visible {
+    outline: 2px solid var(--background);
+    outline-offset: -2px;
+}
+
+.filters__button--clear:active {
+    transform: translateY(0) scale(0.98);
+    background-color: color-mix(in oklch, var(--primary), transparent 20%);
+    transition: none;
 }
 
 .filters__button--close {
@@ -42,5 +90,12 @@
     position: fixed;
     top: 2rem;
     right: 1rem;
+
+    padding: 0.25rem 0.5rem;
+    color: var(--primary);
+    background-color: color-mix(in oklch, var(--primary), transparent 90%);
+    font-weight: 700;
+    border: 1.5px solid var(--primary);
+    border-radius: 4px;
 
 }

@@ -151,6 +151,7 @@ const renderGroup = (groupList, groupName, type, products) => {
     groupList.forEach((element, index) => {
 
         const elementDiv = document.createElement('div');
+        elementDiv.classList.add('filters__option');
 
         const elementInput = document.createElement('input');
         elementInput.type = type;
