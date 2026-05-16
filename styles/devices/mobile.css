@@ -21,7 +21,6 @@
     .filters-toggle-button:active {
         transform: scale(0.98);
         background-color: color-mix(in oklch, var(--primary), transparent 20%);
-        transition: none;
     }
 
     .backdrop {
