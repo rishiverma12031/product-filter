@@ -21,43 +21,33 @@ const resultsCount = document.querySelector(".products__count");
 const products = await loadProducts();
 let filters = loadFilters(products);
 
-const filteredProducts = filterProducts(products, filters);
-renderProducts(filteredProducts, productsContainer);
-renderResultsCount(products.length, filteredProducts.length, resultsCount);
+// Utility functions
+const updateUI = () => {
+    
+    const filteredProducts = filterProducts(products, filters);
+    renderProducts(filteredProducts, productsContainer);
+    renderResultsCount(products.length, filteredProducts.length, resultsCount);
+
+}
+
+const closeFilters = ()=> {
+
+    filtersBar.classList.remove('filters--open');
+    backdrop.classList.add('hidden');
+    document.body.style.overflow = "auto";
+
+}
+
+// Initital render
+updateUI()
 renderFilters(products, filtersContainer);
 
-filtersToggleBtn.addEventListener('click', () => {
-
-    filtersBar.classList.add('filters--open');
-    backdrop.classList.remove('hidden');
-    document.body.style.overflow = "hidden";
-
-    closeFiltersBtn.addEventListener('click', () => {
-
-        filtersBar.classList.remove('filters--open');
-        backdrop.classList.add('hidden');
-        document.body.style.overflow = "auto";
-
-    });
-
-    backdrop.addEventListener('click', () => {
-
-        filtersBar.classList.remove('filters--open');
-        backdrop.classList.add('hidden');
-        document.body.style.overflow = "auto";
-
-    });
-
-});
-
+// Event listeners and Re-renders
 searchBar.addEventListener('input', (event) => {
 
     filters = updateFilters(filters, event);
     saveFilters(filters);
-
-    const filteredProducts = filterProducts(products, filters);
-    renderProducts(filteredProducts, productsContainer);
-    renderResultsCount(products.length, filteredProducts.length, resultsCount);
+    updateUI();
 
 });
 
@@ -65,23 +55,28 @@ clearSearchBtn.addEventListener('click', () => {
 
     filters = clearSearch(filters);
     saveFilters(filters);
-
-    const filteredProducts = filterProducts(products, filters);
-    renderProducts(filteredProducts, productsContainer);
-    renderResultsCount(products.length, filteredProducts.length, resultsCount);
-
+    updateUI();
     searchBar.value = "";
 
 });
+
+filtersToggleBtn.addEventListener('click', () => {
+
+    filtersBar.classList.add('filters--open');
+    backdrop.classList.remove('hidden');
+    document.body.style.overflow = "hidden";
+
+});
+
+closeFiltersBtn.addEventListener('click', () => closeFilters());
+
+backdrop.addEventListener('click', () => closeFilters());
 
 filtersContainer.addEventListener('change', (event) => {
 
     filters = updateFilters(filters, event);
     saveFilters(filters);
-
-    const filteredProducts = filterProducts(products, filters);
-    renderProducts(filteredProducts, productsContainer);
-    renderResultsCount(products.length, filteredProducts.length, resultsCount);
+    updateUI();
 
 });
 
@@ -89,10 +84,7 @@ clearFiltersBtn.addEventListener('click', () => {
 
     filters = clearAllFilters(filters, products);
     saveFilters(filters);
-
-    const filteredProducts = filterProducts(products, filters);
-    renderProducts(filteredProducts, productsContainer);
-    renderResultsCount(products.length, filteredProducts.length, resultsCount);
+    updateUI();
     renderFilters(products, filtersContainer); 
 
 });
