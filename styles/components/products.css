@@ -31,22 +31,6 @@
     outline-offset: -2px;
 }
 
-.products__button {
-
-}
-
-.products__button:hover {
-
-}
-
-.products__button:focus-visible {
-
-}
-
-.products__button:active {
-
-}
-
 .products__count {
     text-align: center;
     color: color-mix(in oklch, var(--primary), transparent 20%);

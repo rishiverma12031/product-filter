@@ -113,7 +113,6 @@ const getAvailability = () => ["true", "false"];
 const renderGroup = (groupList, groupName, type, products) => {
 
     const group = document.createElement('div');
-    group.classList.add('filters__dropdown');
 
     const groupTitleDiv = document.createElement('div');
     groupTitleDiv.classList.add('filters__subheading-container');

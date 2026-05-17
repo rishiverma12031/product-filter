@@ -16,10 +16,6 @@
     margin-left: 0.5rem;
 }
 
-.filters__dropdown {
-
-}
-
 .filters__subheading-container {
     display: flex;
     gap: 0.5rem;
@@ -58,22 +54,6 @@
 .filters__option {
     display: flex;
     gap: 0.5rem;
-}
-
-.filters__button--clear {
-
-}
-
-.filters__button--clear:hover {
-
-}
-
-.filters__button--clear:focus-visible {
-
-}
-
-.filters__button--clear:active {
-
 }
 
 .filters__button--close {
