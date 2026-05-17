@@ -12,7 +12,23 @@ A sophisticated product filtering system built with **pure vanilla JavaScript**,
 
 ## 📸 Screenshots
 
-![Product Filter Interface](./screenshots/demo.png) *(Screenshots will be added soon)*
+<img
+    src="./screenshots/screenshot2.png"
+    alt="Product Filter Interface"
+    width="300px"
+/>
+
+<img
+    src="./screenshots/screenshot4.png"
+    alt="Product Filter Interface"
+    width="100px"
+/>
+
+<img
+    src="./screenshots/screenshot3.png"
+    alt="Product Filter Interface"
+    width="100px"
+/>
 
 ## ✨ Features
 
