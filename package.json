@@ -1,0 +1,39 @@
+
+{
+  "name": "product-filter",
+  "version": "1.0.0",
+  "description": "Advanced product filtering system with multi-criteria search, price range slider, and responsive design - built with vanilla JavaScript",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve . -p 3000"
+  },
+  "keywords": [
+    "vanilla-javascript",
+    "product-filter",
+    "search",
+    "filtering",
+    "e-commerce",
+    "functional-programming",
+    "immutability",
+    "state-management",
+    "responsive-design",
+    "mobile-first",
+    "local-storage",
+    "pure-functions",
+    "array-methods"
+  ],
+  "author": "Rishi Verma",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rishiverma12031/product-filter.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rishiverma12031/product-filter/issues"
+  },
+  "homepage": "https://github.com/rishiverma12031/product-filter#readme",
+  "devDependencies": {},
+  "dependencies": {}
+}
