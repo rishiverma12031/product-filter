@@ -10,17 +10,13 @@
         top: calc(50% - 10rem);
         left: 0;
         padding: 10rem 0.5rem;
-        color: var(--background);
-        background-color: var(--primary);
         font-size: 1rem;
         writing-mode: vertical-rl;
-        border: none;
         border-radius: 0rem 100% 100% 0; 
     }
 
     .filters-toggle-button:active {
         transform: scale(0.98);
-        background-color: color-mix(in oklch, var(--primary), transparent 20%);
     }
 
     .backdrop {

@@ -61,28 +61,19 @@
 }
 
 .filters__button--clear {
-    background-color: var(--primary);
-    color: var(--background);
-    border: none;
-    padding: 0.5rem;
-    border-radius: 8px;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+
 }
 
 .filters__button--clear:hover {
-    background-color: color-mix(in oklch, var(--primary), black 20%);
-    transform: translateY(-1px);
+
 }
 
 .filters__button--clear:focus-visible {
-    outline: 2px solid var(--background);
-    outline-offset: -2px;
+
 }
 
 .filters__button--clear:active {
-    transform: translateY(0) scale(0.98);
-    background-color: color-mix(in oklch, var(--primary), transparent 20%);
-    transition: none;
+
 }
 
 .filters__button--close {
